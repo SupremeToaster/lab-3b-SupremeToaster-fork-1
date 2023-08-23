@@ -15,13 +15,13 @@ This lab builds off the previous labs (as do all of the labs), so make sure you 
 #### Differences from Lab 2
 
 - Using PHP instead of JavaScript
-   - PHP is strictly server-side, which means all the database-accessing happens before a response is made from the server
-   - The JavaScript in Labs 2 and 3 are strictly client-side, which means all of the database-accessing happens after the response from the server.
-      - This means we can take one of two actions: use a local database (e.g. local storage), or make calls back to the server (e.g. API calls). We did the first one in lab 2, and we'll do the second one in lab 6.
+  - PHP is strictly server-side, which means all the database-accessing happens before a response is made from the server
+  - The JavaScript in Labs 2 and 3 are strictly client-side, which means all of the database-accessing happens after the response from the server.
+    - This means we can take one of two actions: use a local database (e.g. local storage), or make calls back to the server (e.g. API calls). We did the first one in lab 2, and we'll do the second one in lab 6.
 - Using a database server instead of local storage
-   - Because PHP runs server-side, any sorting that happens needs to be done before a response is sent from the server. This makes sorting a little more difficult in PHP than in JavaScript, so it is not required for this lab. We *would* do this by the SQL `ORDER BY` directive.
+  - Because PHP runs server-side, any sorting that happens needs to be done before a response is sent from the server. This makes sorting a little more difficult in PHP than in JavaScript, so it is not required for this lab. We _would_ do this by the SQL `ORDER BY` directive.
 - Logging users in
-   - If we didn't log users in, we wouldn't be able to easily and securely distinguish among users. We would have some kind of global task list for everyone, which sounds cool, but isn't very useful. (Twitch plays task list?)
+  - If we didn't log users in, we wouldn't be able to easily and securely distinguish among users. We would have some kind of global task list for everyone, which sounds cool, but isn't very useful. (Twitch plays task list?)
 
 ### Concepts
 
@@ -38,7 +38,7 @@ This lab builds off the previous labs (as do all of the labs), so make sure you 
 - [Official PHP Documentation](https://www.php.net/)
 - [PHP Sessions](https://www.w3schools.com/php/php_sessions.asp)
 - [Prepared Statements](https://www.php.net/manual/en/mysqli.prepare.php)
-> NOTE: Make sure you're using "Object-Oriented Style" prepared statements, NOT "Procedural Style"
+  > NOTE: Make sure you're using "Object-Oriented Style" prepared statements, NOT "Procedural Style"
 
 ### Assignments
 
@@ -58,16 +58,17 @@ Create a UML diagram of the interaction described in the entire lab (CRUD functi
 
    - Add the following fields:
 
-      | Name      | Type      | Index     | ... | A_I | ... |
-      | --------- | --------- | --------- | --- | --- | --- |
-      | `id`      | `INT`     | `PRIMARY` | ... | ☒   | ... |
-      | `user_id` | `INT`     |           | ... | ☐   | ... |
-      | `text`    | `TEXT`    |           | ... | ☐   | ... |
-      | `date`    | `DATE`    |           | ... | ☐   | ... |
-      | `done`    | `BOOLEAN` |           | ... | ☐   | ... |
+     | Name      | Type      | Index     | ... | A_I | ... |
+     | --------- | --------- | --------- | --- | --- | --- |
+     | `id`      | `INT`     | `PRIMARY` | ... | ☒   | ... |
+     | `user_id` | `INT`     |           | ... | ☐   | ... |
+     | `text`    | `TEXT`    |           | ... | ☐   | ... |
+     | `date`    | `DATE`    |           | ... | ☐   | ... |
+     | `done`    | `BOOLEAN` |           | ... | ☐   | ... |
 
-      > Note: The MariaDB DATE type is just a fancy text or varchar that gets validated upon submission.
-   - If using Type `TEXT` gives you problems, you can use `VARCHAR` instead with an appropriately long max length value for a task’s `text` property. 
+     > Note: The MariaDB DATE type is just a fancy text or varchar that gets validated upon submission.
+
+   - If using Type `TEXT` gives you problems, you can use `VARCHAR` instead with an appropriately long max length value for a task’s `text` property.
 
 1. Using PHPMyAdmin or the MariaDB CLI, add a few tasks so you have some data to work with. Make sure the `user_id` field matches a user that already exists in your database.
 
@@ -79,7 +80,7 @@ Create a UML diagram of the interaction described in the entire lab (CRUD functi
 
 ### Step 3: Transpile
 
-> Because of the differences in where the code is run, and the difficulties in reproducing functionalities because of that, it becomes *very difficult* to get an automatic transpiler to convert from JavaScript to PHP. We want to copy over the general functionality, not all of the logic. DO NOT try and have your code automatically transpiled, *it will not work*.
+> Because of the differences in where the code is run, and the difficulties in reproducing functionalities because of that, it becomes _very difficult_ to get an automatic transpiler to convert from JavaScript to PHP. We want to copy over the general functionality, not all of the logic. DO NOT try and have your code automatically transpiled, _it will not work_.
 
 1. Create
 
@@ -104,21 +105,21 @@ Create a UML diagram of the interaction described in the entire lab (CRUD functi
    - Create a new action file called `update_action.php`
    - Pass the task's `id` with the rest of the form when you submit it
 
-      > TIP: You can accomplish this with a hidden `<input>` tag who's value is the tasks's `id`
-      > TIP: Make sure to apply the correct CSS classes to the form to make the style consistent with Lab 2
+     > TIP: You can accomplish this with a hidden `<input>` tag who's value is the tasks's `id`
+     > TIP: Make sure to apply the correct CSS classes to the form to make the style consistent with Lab 2
 
    - Your action file needs to accomplish the following tasks:
      1. Read the values passed from the form
      2. Update the task in the database based on the passed values
      3. Redirect back to `index.php` if the update succeeds
-    > HINT: Use a material icon for the button
+        > HINT: Use a material icon for the button
 
 4. Delete
 
    - Wrap your delete button in a `<form>` tag
      - If your delete button is an actual `<button>` tag, change the type to `type="submit"`
      - Otherwise, wrap the element that contains your delete button in a new `<button type="submit">` tag
-     > TIP: Make sure to apply the correct CSS classes to the form to make the style consistent with Lab 2
+       > TIP: Make sure to apply the correct CSS classes to the form to make the style consistent with Lab 2
    - Create a new action file called `delete_action.php`
    - As with `update_action.php`, pass the user's `id` with the rest of the form when you submit it
    - Your action file needs to accomplish the following tasks:
@@ -158,7 +159,6 @@ In PHP there is a way to nicely print out any type of variable and it is var_dum
 
 # PHP – Part 2 Pass-off
 
-
 ## Passoff Requirements
 
 - [ ] 30 Points - Site is running on live server
@@ -176,7 +176,8 @@ In PHP there is a way to nicely print out any type of variable and it is var_dum
 > For extra credit to apply all passoff requirements need to be met
 
 ## Style Requirements
-- [ ] No *ugly* elements
+
+- [ ] No _ugly_ elements
 - [ ] Website looks neat and tidy, with no text against the edge of the screen
 - [ ] Your site DOES NOT use the default black and white color scheme
 - [ ] Navbar is at the top of the page
@@ -190,9 +191,11 @@ In PHP there is a way to nicely print out any type of variable and it is var_dum
 - [ ] Dates are displayed in MM/DD/YYYY format
 
 ## UML Diagram
+
 - [ ] UML Activity Diagram in digital form, showing the functionality of your `index.php` file (checking the user is logged in & CRUD functions) using swim lanes (User, Browser, Server/PHP, Database)
 
 ## Extra Credit
+
 > Note: TAs cannot help you with extra credit!
 
 - [ ] 10 Points - Using PHP, sanitize user input to prevent XSS attacks
