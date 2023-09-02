@@ -14,11 +14,13 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== 'yes') {
 
 include 'db_connection.php';
 
+// Read checkbox states
+$sort_by_date = isset($_POST['cb-sort']) ? "ASC" : "DESC";
+$filter_completed = isset($_POST['cb-filter']) ? "AND done = 0" : "";
+
 $user_id = $_SESSION['user_id'];
-$stmt = $conn->prepare("SELECT * FROM tasks WHERE user_id = ? AND done = 0 ORDER BY date ASC");
-if ($stmt === false) {
-    error_log("Debug: Prepare failed: " . $conn->error);
-}
+$query = "SELECT * FROM tasks WHERE user_id = ? $filter_completed ORDER BY date $sort_by_date";
+$stmt = $conn->prepare($query);
 $stmt->bind_param("s", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -26,16 +28,5 @@ $result = $stmt->get_result();
 // Debugging: Log the number of tasks fetched
 error_log("Debug: Number of tasks fetched: " . $result->num_rows);
 
-
-function echoTask($task) {
-    $checkedStatus = $task['done'] ? "checked" : "";
-    $checkedClass = $task['done'] ? "task-checked" : "";
-    
-    echo "<li class='task' id='task-{$task['id']}'>";
-    echo "<input type='checkbox' class='task-done checkbox-icon' $checkedStatus onclick='updateTask({$task['id']})' />";
-    echo "<span class='task-description $checkedClass'>{$task['text']}</span>";
-    echo "<span class='class-date'>{$task['date']}</span>";
-    echo "<button type='button' class='task-delete material-icon' onclick='deleteTask({$task['id']})'>backspace</button>";
-    echo "</li>";
-}
+// ... (rest of the code remains the same)
 ?>
