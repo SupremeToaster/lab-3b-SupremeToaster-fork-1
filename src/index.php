@@ -53,7 +53,7 @@ function echoTask($task) {
     <a href="https://707d8d6bdb434516a0857a9cc637bec2.vfs.cloud9.us-west-1.amazonaws.com/_static/public_html/portfoliolab/home.html">My Resume</a>
     <a href="actions/logout_action.php">Log Out</a>
   </nav>
-  <h1>My To-Do List</h1>
+  <h1>To-Do List</h1>
   <input type="checkbox" class="toggle-switch" id="cb-sort" /><label for="cb-sort">Sort by date</label>
   <input type="checkbox" class="toggle-switch" id="cb-filter" /><label for="cb-filter">Filter completed tasks</label>
   <ul id="taskContainer" class="tasklist">
