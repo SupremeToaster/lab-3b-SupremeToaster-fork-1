@@ -27,6 +27,7 @@ $result = $stmt->get_result();
 
 // Debugging: Log the number of tasks fetched
 error_log("Debug: Number of tasks fetched: " . $result->num_rows);
+
 function echoTask($task) {
     $checkedStatus = $task['done'] ? "checked" : "";
     $checkedClass = $task['done'] ? "task-checked" : "";
