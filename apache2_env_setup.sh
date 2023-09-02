@@ -1,3 +1,4 @@
+
 #!/usr/bin/env bash
 
 # This script is only to be used on your live server to help source your .env file. 
