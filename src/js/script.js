@@ -10,11 +10,20 @@ $(document).ready(function () {
         // Update the UI based on the response
         if (data.success) {
           // Filter the tasks in the UI
-          // (This part can be customized based on how you want to filter the tasks)
+          $("#taskContainer").empty(); // Clear the existing tasks
+          data.tasks.forEach(function (task) {
+            // Assuming 'task' contains the necessary information
+            // Add each task to the UI
+            $(
+              "#taskContainer"
+            ).append(/* Your HTML code to represent the task */);
+          });
         }
       },
       "json"
-    );
+    ).catch(function (error) {
+      console.log("Error:", error); // Debugging line
+    });
   });
 });
 
@@ -64,3 +73,22 @@ $("#cb-sort").change(function () {
     "json"
   );
 });
+
+// Fetch tasks from the server
+function fetchTasks() {
+  fetch("index.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: "action=fetch",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data); // Log the data on success
+      displayTasks(data);
+    })
+    .catch((error) => {
+      console.error("Error:", error); // Log any errors
+    });
+}
