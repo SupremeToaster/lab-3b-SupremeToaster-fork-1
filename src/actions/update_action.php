@@ -2,13 +2,19 @@
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $task_id = $_POST['task_id'];
-    $sql = "UPDATE tasks SET done = !done WHERE id = '$task_id'";
-    
-    if ($conn->query($sql) === TRUE) {
-        echo json_encode(["success" => true]);
+    include '../db_connection.php';
+
+    $task_id = $_POST['id'];
+    $user_id = $_SESSION['user_id'];
+
+    $query = "UPDATE tasks SET done = NOT done WHERE id = ? AND user_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ss", $task_id, $user_id);
+
+    if ($stmt->execute()) {
+        echo json_encode(['success' => true]);
     } else {
-        echo json_encode(["success" => false, "error" => $conn->error]);
+        echo json_encode(['success' => false, 'error' => $stmt->error]);
     }
 }
 ?>
