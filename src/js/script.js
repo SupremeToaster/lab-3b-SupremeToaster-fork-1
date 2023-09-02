@@ -25,6 +25,8 @@ function updateTask(taskId) {
   ); // Expect a JSON response
 }
 
+/*
 $("#cb-sort, #cb-filter").change(function () {
   $("#sortAndFilterForm").submit();
 });
+*/
