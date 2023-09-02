@@ -1,6 +1,5 @@
 <?php
 session_start();
-include '../db_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $task_id = $_POST['task_id'];
@@ -11,6 +10,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo json_encode(["success" => false, "error" => $conn->error]);
     }
-    exit;  // Important: exit the script to prevent further output
 }
 ?>

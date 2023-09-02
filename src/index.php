@@ -1,10 +1,10 @@
 <?php
 // Start session
-session_start();
+  session_start();
 
 // Debugging: Log session variables
-error_log("Debug: Session logged_in: " . $_SESSION['logged_in']);
-error_log("Debug: Session user_id: " . $_SESSION['user_id']);
+//error_log("Debug: Session logged_in: " . $_SESSION['logged_in']);
+//error_log("Debug: Session user_id: " . $_SESSION['user_id']);
 
 // Check if the user is logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== 'yes') {
@@ -14,19 +14,14 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== 'yes') {
 
 include 'db_connection.php';
 
-// Read checkbox states
-$sort_by_date = isset($_POST['cb-sort']) ? "ASC" : "DESC";
-$filter_completed = isset($_POST['cb-filter']) ? "AND done = 0" : "";
-
 $user_id = $_SESSION['user_id'];
-$query = "SELECT * FROM tasks WHERE user_id = ? $filter_completed ORDER BY date $sort_by_date";
-$stmt = $conn->prepare($query);
+$stmt = $conn->prepare("SELECT * FROM tasks WHERE user_id = ? AND done = 0 ORDER BY date ASC");
 $stmt->bind_param("s", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
 // Debugging: Log the number of tasks fetched
-error_log("Debug: Number of tasks fetched: " . $result->num_rows);
+//error_log("Debug: Number of tasks fetched: " . $result->num_rows);
 
 function echoTask($task) {
     $checkedStatus = $task['done'] ? "checked" : "";
@@ -38,7 +33,7 @@ function echoTask($task) {
     echo "<span class='class-date'>{$task['date']}</span>";
     echo "<button type='button' class='task-delete material-icon' onclick='deleteTask({$task['id']})'>backspace</button>";
     echo "</li>";
-}
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,13 +50,8 @@ function echoTask($task) {
     <a href="actions/logout_action.php">Log Out</a>
   </nav>
   <h1>To-Do List</h1>
-  <form id="sortAndFilterForm" method="post">
-    <input type="checkbox" class="toggle-switch" id="cb-sort" name="cb-sort" <?php echo $sort_by_date === "ASC" ? 'checked' : ''; ?> />
-    <label for="cb-sort">Sort by date</label>
-
-    <input type="checkbox" class="toggle-switch" id="cb-filter" name="cb-filter" <?php echo $filter_completed === "AND done = 0" ? 'checked' : ''; ?> />
-    <label for="cb-filter">Filter completed tasks</label>
-  </form>
+  <input type="checkbox" class="toggle-switch" id="cb-sort" /><label for="cb-sort">Sort by date</label>
+  <input type="checkbox" class="toggle-switch" id="cb-filter" /><label for="cb-filter">Filter completed tasks</label>
   <ul id="taskContainer" class="tasklist">
     <?php
     while ($row = $result->fetch_assoc()) {
