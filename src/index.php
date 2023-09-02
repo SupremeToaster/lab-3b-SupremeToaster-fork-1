@@ -57,7 +57,7 @@ function echoTask($task) {
   <form id="sortAndFilterForm" method="post">
     <input type="checkbox" class="toggle-switch" id="cb-sort" name="cb-sort" <?php echo $sort_by_date === "ASC" ? 'checked' : ''; ?> />
     <label for="cb-sort">Sort by date</label>
-    
+
     <input type="checkbox" class="toggle-switch" id="cb-filter" name="cb-filter" <?php echo $filter_completed === "AND done = 0" ? 'checked' : ''; ?> />
     <label for="cb-filter">Filter completed tasks</label>
   </form>
